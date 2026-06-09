@@ -1,0 +1,323 @@
+<!--
+  =====================================================================
+  VIALEX — Sección "Nuestro Proceso"
+  Pega el bloque <style> dentro de tu <head> (o al final del CSS existente)
+  Pega el bloque <section> donde estaba la sección de precios anterior.
+  =====================================================================
+-->
+
+
+<!-- ═══════════════════════════════════════════
+     CSS — agregar dentro de <style> o en tu .css
+     ═══════════════════════════════════════════ -->
+<style>
+/* 5. Proceso */
+.precios {
+    background-color: var(--bg-main);
+}
+
+/* Infograma de proceso */
+.proceso-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+/* Fila superior: 3 pasos horizontales */
+.proceso-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    position: relative;
+}
+
+/* Línea conectora horizontal entre pasos */
+.proceso-row::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: calc(16.6% + 36px);
+    right: calc(16.6% + 36px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent-green) 0%, var(--accent-gold) 100%);
+    opacity: 0.35;
+}
+
+.proceso-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    max-width: 200px;
+    position: relative;
+    z-index: 1;
+}
+
+.proceso-step-number {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.proceso-step:hover .proceso-step-number {
+    transform: scale(1.08);
+}
+
+.proceso-step-number.color-teal {
+    background-color: rgba(29, 158, 117, 0.12);
+    border: 1px solid rgba(29, 158, 117, 0.35);
+    color: #1d9e75;
+}
+
+.proceso-step-number.color-gold {
+    background-color: rgba(201, 168, 76, 0.12);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: var(--accent-gold);
+}
+
+.proceso-step-number.color-green {
+    background-color: rgba(45, 106, 79, 0.18);
+    border: 1px solid rgba(45, 106, 79, 0.45);
+    color: #c9a84c;
+}
+
+.proceso-step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.proceso-step-sub {
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.proceso-step-card {
+    background-color: var(--bg-alt-2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 16px;
+    width: 100%;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.proceso-step:hover .proceso-step-card {
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-3px);
+}
+
+.proceso-step-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Flecha hacia abajo al paso 4 */
+.proceso-arrow-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px 0;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    opacity: 0.4;
+    gap: 2px;
+}
+
+.proceso-arrow-down span {
+    display: block;
+    width: 1px;
+    height: 20px;
+    background: linear-gradient(180deg, var(--accent-gold) 0%, transparent 100%);
+    margin: 0 auto;
+}
+
+/* Paso 4 destacado */
+.proceso-step-highlight {
+    width: 100%;
+    max-width: 780px;
+    background: linear-gradient(135deg, rgba(45, 106, 79,0.08) 0%, rgba(201, 168, 76,0.06) 100%);
+    border: 1px solid rgba(45, 106, 79, 0.2);
+    border-radius: 14px;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.proceso-step-highlight:hover {
+    border-color: rgba(45, 106, 79, 0.4);
+    box-shadow: 0 12px 40px rgba(45, 106, 79, 0.12);
+}
+
+.proceso-step-highlight::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(201, 168, 76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.proceso-highlight-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(82, 183, 136, 0.1);
+    border: 1px solid rgba(82, 183, 136, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #c9a84c;
+    flex-shrink: 0;
+}
+
+.proceso-highlight-body {
+    flex: 1;
+}
+
+.proceso-highlight-tag {
+    display: inline-block;
+    background-color: rgba(201, 168, 76,0.12);
+    color: var(--accent-gold);
+    border: 1px solid rgba(201, 168, 76,0.25);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.proceso-highlight-body h3 {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.proceso-highlight-body p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.proceso-highlight-cta {
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .proceso-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .proceso-row::before { display: none; }
+    .proceso-step { max-width: 100%; width: 100%; }
+    .proceso-step-highlight {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+        gap: 20px;
+    }
+    .proceso-highlight-cta { width: 100%; }
+    .proceso-highlight-cta .btn { width: 100%; }
+}
+</style>
+
+
+<!-- ═══════════════════════════════════════════
+     HTML — reemplaza tu sección id="precios"
+     ═══════════════════════════════════════════ -->
+
+<!-- 5. NUESTRO PROCESO -->
+<section id="proceso" class="precios fade-in">
+    <div class="container">
+        <div class="section-header">
+            <h2>Nuestro Proceso</h2>
+            <p>De la primera conversación a resultados medibles en su empresa. Sin tecnicismos, sin sorpresas.</p>
+        </div>
+
+        <div class="proceso-wrapper">
+
+            <!-- Fila de 3 pasos -->
+            <div class="proceso-row">
+
+                <!-- Paso 01 -->
+                <div class="proceso-step">
+                    <div class="proceso-step-number color-teal">01</div>
+                    <div class="proceso-step-title">Diagnóstico</div>
+                    <div class="proceso-step-sub">Gratuito · Sin compromiso</div>
+                    <div class="proceso-step-card">
+                        <p>Analizamos sus procesos actuales, identificamos cuellos de botella y le mostramos exactamente dónde la IA puede generar más valor.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 02 -->
+                <div class="proceso-step">
+                    <div class="proceso-step-number color-teal">02</div>
+                    <div class="proceso-step-title">Propuesta a medida</div>
+                    <div class="proceso-step-sub">ROI estimado incluido</div>
+                    <div class="proceso-step-card">
+                        <p>Diseñamos la solución exacta para su negocio, con tecnología adaptada a su industria y un plan de implementación claro.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 03 -->
+                <div class="proceso-step">
+                    <div class="proceso-step-number color-gold">03</div>
+                    <div class="proceso-step-title">Implementación</div>
+                    <div class="proceso-step-sub">Entrega funcionando</div>
+                    <div class="proceso-step-card">
+                        <p>Desarrollamos, probamos y entregamos todo en funcionamiento. Nos aseguramos de que su equipo opere con confianza desde el primer día.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Flecha hacia abajo -->
+            <div class="proceso-arrow-down">
+                <span></span>
+                ↓
+            </div>
+
+            <!-- Paso 04 destacado -->
+            <div class="proceso-step-highlight">
+                <div class="proceso-highlight-icon">04</div>
+                <div class="proceso-highlight-body">
+                    <span class="proceso-highlight-tag">✦ Relación a largo plazo</span>
+                    <h3>Acompañamiento continuo</h3>
+                    <p>No desaparecemos tras la entrega. Ofrecemos soporte dedicado, monitoreo de resultados y mejoras iterativas para que su inversión siga creciendo con el tiempo.</p>
+                </div>
+                <div class="proceso-highlight-cta">
+                    <a href="#contacto" class="btn btn-primary">Comenzar ahora →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

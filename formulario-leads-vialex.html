@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Vialex – Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── PAGE SHELL (solo para preview) ─── */
+    :root {
+      --bg-main: #0d0d0d;
+      --bg-alt-1: #111111;
+      --bg-alt-2: #161616;
+      --accent-green: #2d6a4f;
+      --accent-green-hover: #1b4332;
+      --accent-green-glow: rgba(45, 106, 79,0.35);
+      --accent-gold: #c9a84c;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --border: rgba(255,255,255,0.07);
+      --border-focus: rgba(45, 106, 79,0.7);
+      --radius: 12px;
+      --tr: all 0.25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* ─── SECCIÓN COMPLETA (pegar en index.html) ─── */
+
+    .lead-section {
+      width: 100%;
+      max-width: 780px;
+    }
+
+    /* Encabezado de sección */
+    .lead-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .lead-badge {
+      display: inline-block;
+      background: rgba(45, 106, 79,0.15);
+      color: #c9a84c;
+      border: 1px solid rgba(45, 106, 79,0.3);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+    .lead-title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lead-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Tarjeta del formulario */
+    .lead-card {
+      background: var(--bg-alt-1);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Halo verde decorativo */
+    .lead-card::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(45, 106, 79,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Grid del formulario */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #d4d4d8;
+      letter-spacing: 0.01em;
+    }
+    label .req { color: var(--accent-gold); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      background: var(--bg-alt-2);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 14px;
+      transition: var(--tr);
+      outline: none;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    input::placeholder,
+    textarea::placeholder { color: #52525b; }
+
+    input:hover, select:hover, textarea:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79,0.12);
+      background: #111;
+    }
+    input.error, select.error, textarea.error {
+      border-color: rgba(239,68,68,0.6);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
+    }
+
+    /* Select con flecha custom */
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.85rem;
+    }
+    select option { background: #1a1a1a; }
+
+    textarea {
+      resize: vertical;
+      min-height: 96px;
+      line-height: 1.55;
+    }
+
+    /* Mensajes de error por campo */
+    .field-error {
+      font-size: 0.75rem;
+      color: #f87171;
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    .field-error.visible { display: flex; }
+
+    /* Privacidad */
+    .privacy-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .privacy-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      accent-color: var(--accent-green);
+      margin-top: 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .privacy-row label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+    .privacy-row label a {
+      color: #c9a84c;
+      text-decoration: none;
+    }
+    .privacy-row label a:hover { text-decoration: underline; }
+
+    /* Botón enviar */
+    .btn-submit {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--accent-green);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--tr);
+      box-shadow: 0 4px 20px rgba(45, 106, 79,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-submit:hover:not(:disabled) {
+      background: var(--accent-green-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(45, 106, 79,0.5);
+    }
+    .btn-submit:active:not(:disabled) { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Spinner */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-submit.loading .btn-text { display: none; }
+    .btn-submit.loading .spinner { display: block; }
+
+    /* Micro-textos debajo del botón */
+    .form-trust {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #52525b;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .form-trust span { display: flex; align-items: center; gap: 4px; }
+
+    /* ─── ESTADO DE ÉXITO ─── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+      animation: fadeUp 0.5s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .success-icon {
+      width: 64px; height: 64px;
+      background: rgba(45, 106, 79,0.15);
+      border: 1px solid rgba(45, 106, 79,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+    }
+    .success-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .success-sub {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 400px;
+      margin: 0 auto 6px;
+      line-height: 1.6;
+    }
+    .success-time {
+      display: inline-block;
+      background: rgba(45, 106, 79,0.1);
+      color: #c9a84c;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      margin-top: 8px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .lead-card { padding: 28px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .lead-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     SECCIÓN COMPLETA – pegar en index.html
+     Reemplaza el id="cta" actual o agrégala antes de él
+     ════════════════════════════════════════════════ -->
+<section id="contacto" class="lead-section">
+
+  <div class="lead-header">
+    <div class="lead-badge">✦ Sin compromiso · Respuesta en menos de 24 h</div>
+    <h2 class="lead-title">Cuéntenos sobre su empresa<br>y le diseñamos un plan</h2>
+    <p class="lead-subtitle">
+      Completar este formulario toma 90 segundos. Le enviaremos una propuesta
+      adaptada a sus procesos, sin costos ocultos ni presión comercial.
+    </p>
+  </div>
+
+  <div class="lead-card">
+
+    <!-- ── Formulario ── -->
+    <form id="leadForm" novalidate>
+      <div class="form-grid">
+
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="nombre">Nombre y apellido <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" placeholder="Juan García" autocomplete="name">
+          <span class="field-error" id="err-nombre">⚠ Por favor ingresa tu nombre.</span>
+        </div>
+
+        <!-- Empresa -->
+        <div class="form-group">
+          <label for="empresa">Empresa <span class="req">*</span></label>
+          <input type="text" id="empresa" name="empresa" placeholder="Mi Empresa S.A.C.">
+          <span class="field-error" id="err-empresa">⚠ Por favor ingresa el nombre de tu empresa.</span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Correo electrónico <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="juan@empresa.com" autocomplete="email">
+          <span class="field-error" id="err-email">⚠ Ingresa un correo válido.</span>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp / Teléfono</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="+51 999 999 999" autocomplete="tel">
+        </div>
+
+        <!-- Tamaño de empresa -->
+        <div class="form-group">
+          <label for="tamano">Tamaño de empresa <span class="req">*</span></label>
+          <div class="select-wrap">
+            <select id="tamano" name="tamano">
+              <option value="" disabled selected>Seleccionar...</option>
+              <option value="1-5">1 – 5 personas</option>
+              <option value="6-20">6 – 20 personas</option>
+              <option value="21-50">21 – 50 personas</option>
+              <option value="51+">Más de 50 personas</option>
+            </select>
+          </div>
+          <span class="field-error" id="err-tamano">⚠ Selecciona el tamaño de tu empresa.</span>
+        </div>
+
+        <!-- Rubro -->
+        <div class="form-group">
+          <label for="rubro">Industria / Rubro</label>
+          <div class="select-wrap">
+            <select id="rubro" name="rubro">
+              <option value="" disabled selected>Seleccionar...</option>
+              <option value="comercio">Comercio / Retail</option>
+              <option value="logistica">Logística / Transporte</option>
+              <option value="salud">Salud / Clínicas</option>
+              <option value="legal">Legal / Contabilidad</option>
+              <option value="inmobiliaria">Inmobiliaria / Construcción</option>
+              <option value="educacion">Educación</option>
+              <option value="tecnologia">Tecnología / SaaS</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Problema principal -->
+        <div class="form-group full">
+          <label for="problema">¿Cuál es el principal proceso que le quita tiempo a su equipo? <span class="req">*</span></label>
+          <textarea id="problema" name="problema"
+            placeholder="Ej: Ingresamos facturas manualmente a Excel, respondemos los mismos correos todo el día, hacemos reportes que tardan horas..."></textarea>
+          <span class="field-error" id="err-problema">⚠ Cuéntanos brevemente cuál es el proceso que quieres automatizar.</span>
+        </div>
+
+        <!-- Privacidad -->
+        <div class="form-group full">
+          <div class="privacy-row">
+            <input type="checkbox" id="privacidad" name="privacidad">
+            <label for="privacidad">
+              Acepto que Vialex almacene mis datos para contactarme con información
+              sobre sus servicios. No compartimos tu información con terceros.
+              <a href="#">Política de privacidad</a>.
+            </label>
+          </div>
+          <span class="field-error" id="err-privacidad" style="margin-top:4px;">⚠ Debes aceptar la política de privacidad.</span>
+        </div>
+
+        <!-- Botón -->
+        <div class="form-group full">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="btn-text">📅 Solicitar mi evaluación gratuita</span>
+            <div class="spinner"></div>
+          </button>
+          <div class="form-trust">
+            <span>🔒 Datos 100% confidenciales</span>
+            <span>⚡ Respuesta en menos de 24 h</span>
+            <span>✓ Sin contratos ni compromisos</span>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <!-- ── Estado de éxito ── -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">✓</div>
+      <h3 class="success-title">¡Recibimos su consulta!</h3>
+      <p class="success-sub">
+        Gracias por contactarnos. Uno de nuestros especialistas revisará
+        su caso y le escribirá con una propuesta personalizada.
+      </p>
+      <span class="success-time">⏱ Tiempo de respuesta estimado: menos de 24 horas hábiles</span>
+    </div>
+
+  </div>
+</section>
+<!-- ════ FIN DE LA SECCIÓN ════ -->
+
+
+<!-- ════════════════════════════════════════════════
+     JAVASCRIPT DE VALIDACIÓN Y ENVÍO
+     Pegar justo antes de </body> en index.html
+     ════════════════════════════════════════════════ -->
+<script>
+(function () {
+
+  /* ── 1. CONFIGURACIÓN – cambia solo estos valores ── */
+  const CONFIG = {
+    // Webhook de Make.com conectado a Notion
+    webhookUrl: 'https://hook.us2.make.com/klo74tt6bqib75hwzm31plmixt1l7a6d',
+
+    // OPCIÓN B: Formspree (gratis, sin backend)
+    // Crea cuenta en formspree.io, copia tu endpoint y descomenta:
+    // formspreeUrl: 'https://formspree.io/f/TU_FORM_ID',
+
+    // OPCIÓN C: Solo para testing – muestra éxito sin enviar nada
+    testMode: false,
+  };
+  /* ──────────────────────────────────────────────── */
+
+  const form       = document.getElementById('leadForm');
+  const submitBtn  = document.getElementById('submitBtn');
+  const successDiv = document.getElementById('successState');
+
+  /* Validación por campo */
+  function validate() {
+    let ok = true;
+
+    function check(id, errId, condition) {
+      const el  = document.getElementById(id);
+      const err = document.getElementById(errId);
+      const bad = !condition(el.value.trim());
+      el.classList.toggle('error', bad);
+      err.classList.toggle('visible', bad);
+      if (bad) ok = false;
+    }
+
+    check('nombre',   'err-nombre',   v => v.length >= 2);
+    check('empresa',  'err-empresa',  v => v.length >= 2);
+    check('email',    'err-email',    v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+    check('tamano',   'err-tamano',   v => v !== '');
+    check('problema', 'err-problema', v => v.length >= 10);
+
+    const privacy = document.getElementById('privacidad');
+    const privErr = document.getElementById('err-privacidad');
+    const privBad = !privacy.checked;
+    privErr.classList.toggle('visible', privBad);
+    if (privBad) ok = false;
+
+    return ok;
+  }
+
+  /* Limpiar error al tipear */
+  ['nombre','empresa','email','tamano','problema'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => {
+      el.classList.remove('error');
+      document.getElementById('err-' + id).classList.remove('visible');
+    });
+  });
+
+  /* Envío */
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    const data = {
+      nombre:   document.getElementById('nombre').value.trim(),
+      empresa:  document.getElementById('empresa').value.trim(),
+      email:    document.getElementById('email').value.trim(),
+      whatsapp: document.getElementById('whatsapp').value.trim(),
+      tamano:   document.getElementById('tamano').value,
+      rubro:    document.getElementById('rubro').value,
+      problema: document.getElementById('problema').value.trim(),
+      fecha:    new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
+      origen:   document.referrer || 'Directo',
+    };
+
+    try {
+      if (CONFIG.testMode) {
+        /* Simulación en modo test */
+        await new Promise(r => setTimeout(r, 1400));
+        console.log('📋 Lead capturado (test mode):', data);
+
+      } else if (CONFIG.webhookUrl) {
+        /* Envío a Make / Zapier / n8n */
+        await fetch(CONFIG.webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+      } else if (CONFIG.formspreeUrl) {
+        /* Envío a Formspree */
+        const fd = new FormData();
+        Object.entries(data).forEach(([k, v]) => fd.append(k, v));
+        await fetch(CONFIG.formspreeUrl, {
+          method: 'POST',
+          body: fd,
+          headers: { Accept: 'application/json' },
+        });
+      }
+
+      /* Éxito */
+      form.style.display = 'none';
+      successDiv.style.display = 'block';
+
+    } catch (err) {
+      console.error('Error al enviar:', err);
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      alert('Ocurrió un error al enviar. Por favor intenta de nuevo o escríbenos directamente.');
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
