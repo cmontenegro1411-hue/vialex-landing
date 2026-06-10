@@ -31,6 +31,15 @@ Desarrollar una landing page de alta conversión para Vialex, una agencia de aut
 - Animaciones de carga controladas por `IntersectionObserver` (clase `fade-in`).
 - Implementación de video nativo (`<video>`) optimizado con `object-fit: cover`.
 
+### 4. Infraestructura y Despliegue
+- **Hosting**: Vercel (Edge CDN, Zero-config, SSL automático).
+- **Control de Versiones (CI/CD)**: Repositorio Git inicializado y vinculado a GitHub (`cmontenegro1411-hue/vialex-landing`).
+- **Procesamiento de Formularios**: Arquitectura automatizada vía Webhooks.
+  - Integración nativa con **Make.com** en tiempo real ("Immediately").
+  - Almacenamiento centralizado en **Notion** (CRM).
+  - Configuración de automatizaciones satélite: Notificaciones a Slack ("Speed to Lead") y Auto-respondedores en Gmail con plantilla HTML corporativa.
+- **Seguridad y Privacidad**: Validación estricta en el Frontend; el envío se bloquea y los datos no salen del navegador si no se acepta explícitamente la política de privacidad, garantizando cumplimiento legal y evitando almacenamiento indebido.
+
 ## Estructura de Secciones (Orden Actualizado)
 1. **Navbar**: Logo + Enlaces dinámicos + CTA "Solicitar Evaluación".
 2. **Hero**: Propuesta de valor actualizada. Botón CTA primario y secundario ("Ver Soluciones").
@@ -58,3 +67,7 @@ Desarrollar una landing page de alta conversión para Vialex, una agencia de aut
   - Implementación de logotipo visual dual (Via-lex) en cabecera y pie de página en colores premium (blanco puro y `#2d6a4f`).
   - Creación de nuevo formulario standalone `formulario-leads-vialex.html`.
   - Actualización de scripts de soporte de color (`update_colors.py`, `revert_colors.py`) para evitar dependencias rotas.
+- **Implementación de Infraestructura y Despliegue**:
+  - Inyección de lógica `fetch` en el frontend hacia la URL del Webhook de Make.com.
+  - Despliegue exitoso en producción (Vercel) con automatización CI/CD (GitHub).
+  - Definición estratégica para el enlace de dominio personalizado (DNS).
