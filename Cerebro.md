@@ -71,3 +71,36 @@ Desarrollar una landing page de alta conversión para Vialex, una agencia de aut
   - Inyección de lógica `fetch` en el frontend hacia la URL del Webhook de Make.com.
   - Despliegue exitoso en producción (Vercel) con automatización CI/CD (GitHub).
   - Definición estratégica para el enlace de dominio personalizado (DNS).
+
+---
+
+## 📅 Sesión 4 de Agosto 2026
+
+### Banner Hero
+- Se actualizó la imagen del hero banner (`assets/logo-footer.png` → `assets/hero-image.png`).
+- Se ajustó el `object-position` del hero de `center` → `25%` → `40%` → `32%` hasta lograr que el vaso quedara perfectamente centrado visualmente.
+- Altura del banner ajustada a `380px`.
+
+### Tipografía de Marca (VIALEX)
+- Se importó la fuente **Nunito** (peso 700/800/900) desde Google Fonts para representar la identidad tipográfica del logo de Vialex.
+- Se creó la clase CSS `.brand-text` con `font-family: Nunito`, `font-weight: 800` y `text-transform: uppercase`.
+- Se aplicó la clase `.brand-text` a **todas las apariciones** del nombre Vialex en la página:
+  - Logo del **Navbar** (cabecera): `VIA` en blanco + `LEX` en verde `#2d6a4f`.
+  - Botón **VIALEX AI Hub** en la navbar (con separador `&nbsp;` para evitar colapso del texto).
+  - Logo del **Footer** (pie de página): misma regla bicolor.
+  - Texto de derechos de autor en el footer.
+
+### Logo en el Footer
+- Se reemplazó el texto `VIA<span>LEX</span>` del pie de página por una etiqueta `<img>` apuntando a `assets/logo-footer.png`.
+- El archivo `logo-footer.png` fue copiado por el cliente a la carpeta `assets/` y pusheado a GitHub.
+- Se ajustó el color de fondo del footer de `var(--bg-main)` (`#0d0d0d`) a **negro puro `#000000`** para eliminar el contraste visible entre el fondo del logo y la página.
+
+### Estado Final del Footer
+- Fondo: `#000000`
+- Logo: imagen `assets/logo-footer.png` con `max-height: 80px`
+- Texto derechos: `© 2025 VIALEX · Automatización con IA para pymes y emprendedores`
+
+### Próximos Pasos Pendientes
+- Revisar si el contraste del footer quedó completamente resuelto en producción.
+- Evaluar si se necesita agregar una versión SVG o PNG con fondo transparente del logo para mayor flexibilidad.
+- Continuar con ajustes de diseño o nuevas secciones según requerimientos del cliente.
