@@ -6,7 +6,7 @@
     <title>Vialex - Automatización con IA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         /* CSS Variables & Base Setup */
         :root {
@@ -60,6 +60,13 @@
         .text-center { text-align: center; }
         .text-accent-gold { color: var(--accent-gold); }
         .italic { font-style: italic; }
+        
+        .brand-text {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         /* Typography */
         h1, h2, h3 { line-height: 1.2; margin-bottom: 16px; }
@@ -153,8 +160,7 @@
 
         .nav-logo {
             font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            color: #fff;
         }
 
         .nav-links {
@@ -1265,7 +1271,7 @@
     <!-- 1. NAVBAR -->
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="nav-logo">Via<span style="color: var(--accent-green);">lex</span></a>
+            <a href="#" class="nav-logo brand-text">VIALEX</a>
             
             <ul class="nav-links" id="navLinks">
                 <li><a href="#servicios">Servicios</a></li>
@@ -1278,7 +1284,7 @@
             <div style="display:flex; align-items:center; gap:15px;">
                 <a href="https://web-portal-three-tau.vercel.app/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; color: #10B981; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 9999px; background-color: rgba(16, 185, 129, 0.1); text-decoration: none; transition: all 0.2s;" onmouseover="this.style.backgroundColor='rgba(16, 185, 129, 0.2)'; this.style.borderColor='rgba(16, 185, 129, 0.6)'" onmouseout="this.style.backgroundColor='rgba(16, 185, 129, 0.1)'; this.style.borderColor='rgba(16, 185, 129, 0.4)'">
                     <svg style="width: 1rem; height: 1rem; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    Vialex AI Hub
+                    <span class="brand-text" style="font-size: 0.9em; letter-spacing: 0px;">VIALEX</span> AI Hub
                 </a>
                 <a href="#contacto" class="btn btn-primary nav-cta">Solicitar Evaluación</a>
                 <div class="burger" id="burger">
@@ -1712,7 +1718,7 @@
     <footer class="footer fade-in">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">Via<span style="color: var(--accent-green);">lex</span></div>
+                <div class="footer-logo brand-text" style="font-size: 2rem;">VIALEX</div>
                 <div class="footer-links">
                     <a href="#servicios">Servicios</a>
                     <a href="#proceso">Nuestro Proceso</a>
@@ -1721,7 +1727,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Vialex · Automatización con IA para pymes y emprendedores</p>
+                <p>© 2025 <span class="brand-text" style="font-size: 0.9em; letter-spacing: 0px;">VIALEX</span> · Automatización con IA para pymes y emprendedores</p>
                 <div class="social-icons">
                     <!-- Ejemplos iconos de redes sociales, placeholders unicode -->
                 </div>
