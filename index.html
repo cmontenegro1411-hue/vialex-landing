@@ -200,24 +200,40 @@
 
         /* 2. Hero */
         .hero {
-            padding-top: 130px; /* Navbar offset + extra padding */
-            padding-bottom: 80px;
-            background: linear-gradient(to right, rgba(13, 13, 13, 0.95) 0%, rgba(13, 13, 13, 0.8) 50%, rgba(13, 13, 13, 0.3) 100%), url('assets/banner.png');
+            padding-top: 120px; /* Navbar offset + extra padding */
+            padding-bottom: 60px;
+            background: linear-gradient(to right, rgba(13, 13, 13, 0.95) 0%, rgba(13, 13, 13, 0.7) 60%, transparent 100%), url('assets/banner.png');
             background-size: cover;
             background-position: center 32%;
             background-repeat: no-repeat;
-            min-height: 60vh;
+            min-height: 45vh;
             display: flex;
             align-items: center;
         }
 
         .hero-layout {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
             text-align: left;
             margin-top: 0;
-            max-width: 60%;
+            width: 100%;
+            gap: 40px;
+        }
+        
+        .hero-text-col {
+            flex: 1;
+            max-width: 65%;
+        }
+
+        .hero-actions-col {
+            flex: 0 0 320px;
+            background: rgba(20, 20, 20, 0.7);
+            padding: 32px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
         }
 
         @media (max-width: 768px) {
@@ -299,10 +315,9 @@
 
         .hero-actions {
             display: flex;
-            justify-content: flex-start;
+            flex-direction: column;
             gap: 16px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .hero-stats {
@@ -752,10 +767,12 @@
         @media (max-width: 768px) {
             .navbar .nav-links { display: none; }
             
-            .hero { padding-top: 120px; padding-bottom: 80px; min-height: 70vh; background-position: 70% center; }
-            .hero-layout { text-align: center; align-items: center; max-width: 100%; margin-top: 0; }
+            .hero { padding-top: 100px; padding-bottom: 60px; min-height: auto; background-position: 70% center; }
+            .hero-layout { flex-direction: column; text-align: center; gap: 32px; align-items: center; }
+            .hero-text-col { max-width: 100%; }
+            .hero-actions-col { flex: 1; width: 100%; max-width: 400px; padding: 24px 16px; }
             .hero-subtitle { max-width: 100%; margin: 0 auto 32px; }
-            .hero-actions { justify-content: center; }
+            .hero-actions { justify-content: center; margin-bottom: 24px; }
             .hero-stats { justify-content: center; }
             
             .grid-3 { grid-template-columns: 1fr; }
@@ -1299,16 +1316,18 @@
     <!-- 2. HERO -->
     <header class="hero" id="home">
         <div class="container hero-layout fade-in">
-            <div class="hero-content">
+            <div class="hero-text-col">
                 <h1 class="hero-title">¿Cuántas horas productivas pierde su equipo en tareas manuales?</h1>
                 <p class="hero-subtitle">Diseñamos e implementamos automatizaciones con IA para pequeñas y medianas empresas. Reduzca tareas manuales, errores y tiempos de respuesta sin cambiar todo su software.</p>
-                
+            </div>
+            
+            <div class="hero-actions-col">
                 <div class="hero-actions">
-                    <a href="#contacto" class="btn btn-primary">Solicitar diagnóstico gratuito</a>
-                    <a href="#videos" class="btn btn-outline">Ver Soluciones ↓</a>
+                    <a href="#contacto" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">Solicitar diagnóstico gratuito</a>
+                    <a href="#videos" class="btn btn-outline" style="width: 100%; text-align: center; justify-content: center;">Ver Soluciones ↓</a>
                 </div>
                 
-                <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 600px; line-height: 1.6;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; text-align: center; margin: 0;">
                     En una llamada de 30 minutos identificaremos qué procesos puede automatizar, cuánto tiempo podría ahorrar y cuál sería el siguiente paso. Sin compromiso.
                 </p>
             </div>
