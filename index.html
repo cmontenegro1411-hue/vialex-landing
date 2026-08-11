@@ -175,6 +175,14 @@
         .nav-cta {
             padding: 10px 20px;
             font-size: 0.9rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-cta {
+            opacity: 1;
+            visibility: visible;
         }
 
         .nav-links .nav-cta-mobile {
@@ -1755,6 +1763,16 @@
     <!-- Lógica JavaScript (Accordion y Animations) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Navbar Scroll Logic
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
             // FAQ Accordion Logic
             const faqItems = document.querySelectorAll('.faq-item');
             
