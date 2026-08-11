@@ -202,7 +202,7 @@
         .hero {
             padding-top: 160px; /* Navbar offset + extra padding */
             padding-bottom: 120px;
-            background: linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 0.95)), url('assets/banner.png');
+            background: linear-gradient(to right, rgba(13, 13, 13, 0.95) 0%, rgba(13, 13, 13, 0.8) 50%, rgba(13, 13, 13, 0.3) 100%), url('assets/banner.png');
             background-size: cover;
             background-position: center 32%;
             background-repeat: no-repeat;
@@ -214,9 +214,10 @@
         .hero-layout {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            text-align: left;
             margin-top: 0;
+            max-width: 60%;
         }
 
         @media (max-width: 768px) {
@@ -292,13 +293,13 @@
 
         .hero-subtitle {
             font-size: 1.1rem;
-            margin: 0 auto 32px;
+            margin: 0 0 32px;
             max-width: 760px;
         }
 
         .hero-actions {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 16px;
             margin-bottom: 32px;
             flex-wrap: wrap;
@@ -306,7 +307,7 @@
 
         .hero-stats {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 24px;
             font-size: 0.85rem;
             color: var(--text-muted);
@@ -751,8 +752,8 @@
         @media (max-width: 768px) {
             .navbar .nav-links { display: none; }
             
-            .hero { padding-top: 120px; padding-bottom: 80px; min-height: 70vh; }
-            .hero-layout { text-align: center; margin-top: 0; }
+            .hero { padding-top: 120px; padding-bottom: 80px; min-height: 70vh; background-position: 70% center; }
+            .hero-layout { text-align: center; align-items: center; max-width: 100%; margin-top: 0; }
             .hero-subtitle { max-width: 100%; margin: 0 auto 32px; }
             .hero-actions { justify-content: center; }
             .hero-stats { justify-content: center; }
