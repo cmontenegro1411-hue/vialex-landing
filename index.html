@@ -1618,27 +1618,35 @@
             <div class="lead-card">
 
                 <!-- Formulario -->
-                <form id="leadForm" novalidate>
+                <form id="leadForm" method="POST" novalidate>
+                    <!-- Campo Antispam (Honeypot) -->
+                    <input type="text" name="_gotcha" id="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    
+                    <!-- Campos UTM Ocultos -->
+                    <input type="hidden" name="utm_source" id="utm_source">
+                    <input type="hidden" name="utm_medium" id="utm_medium">
+                    <input type="hidden" name="utm_campaign" id="utm_campaign">
+
                     <div class="form-grid">
 
                         <!-- Nombre -->
                         <div class="form-group">
                             <label for="nombre">Nombre y apellido <span class="req">*</span></label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Juan García" autocomplete="name">
+                            <input type="text" id="nombre" name="nombre" placeholder="Juan García" autocomplete="name" required>
                             <span class="field-error" id="err-nombre">⚠ Por favor ingresa tu nombre.</span>
                         </div>
 
                         <!-- Empresa -->
                         <div class="form-group">
                             <label for="empresa">Empresa <span class="req">*</span></label>
-                            <input type="text" id="empresa" name="empresa" placeholder="Mi Empresa S.A.C.">
+                            <input type="text" id="empresa" name="empresa" placeholder="Mi Empresa S.A.C." required>
                             <span class="field-error" id="err-empresa">⚠ Por favor ingresa el nombre de tu empresa.</span>
                         </div>
 
                         <!-- Email -->
                         <div class="form-group">
                             <label for="email">Correo electrónico <span class="req">*</span></label>
-                            <input type="email" id="email" name="email" placeholder="juan@empresa.com" autocomplete="email">
+                            <input type="email" id="email" name="email" placeholder="juan@empresa.com" autocomplete="email" required>
                             <span class="field-error" id="err-email">⚠ Ingresa un correo válido.</span>
                         </div>
 
@@ -1652,7 +1660,7 @@
                         <div class="form-group">
                             <label for="tamano">Tamaño de empresa <span class="req">*</span></label>
                             <div class="select-wrap">
-                                <select id="tamano" name="tamano">
+                                <select id="tamano" name="tamano" required>
                                     <option value="" disabled selected>Seleccionar...</option>
                                     <option value="1-5">1 – 5 personas</option>
                                     <option value="6-20">6 – 20 personas</option>
@@ -1685,14 +1693,14 @@
                         <div class="form-group full">
                             <label for="problema">¿Cuál es el principal proceso que le quita tiempo a su equipo? <span class="req">*</span></label>
                             <textarea id="problema" name="problema"
-                                placeholder="Ej: Ingresamos facturas manualmente a Excel, respondemos los mismos correos todo el día, hacemos reportes que tardan horas..."></textarea>
+                                placeholder="Ej: Ingresamos facturas manualmente a Excel, respondemos los mismos correos todo el día, hacemos reportes que tardan horas..." required></textarea>
                             <span class="field-error" id="err-problema">⚠ Cuéntanos brevemente cuál es el proceso que quieres automatizar.</span>
                         </div>
 
                         <!-- Privacidad -->
                         <div class="form-group full">
                             <div class="privacy-row">
-                                <input type="checkbox" id="privacidad" name="privacidad">
+                                <input type="checkbox" id="privacidad" name="privacidad" required>
                                 <label for="privacidad">
                                     Acepto que Vialex almacene mis datos para contactarme con información
                                     sobre sus servicios. No compartimos tu información con terceros.
@@ -1848,6 +1856,15 @@
         const success    = document.getElementById('successState');
         if (!form) return;
 
+        // ── UTM Parameters ───────────────────────────────────────
+        const urlParams = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign'].forEach(param => {
+            const input = document.getElementById(param);
+            if (input && urlParams.has(param)) {
+                input.value = urlParams.get(param);
+            }
+        });
+
         // ── Helpers ──────────────────────────────────────────────
         const show = (id) => { const el = document.getElementById(id); if (el) el.classList.add('visible'); };
         const hide = (id) => { const el = document.getElementById(id); if (el) el.classList.remove('visible'); };
@@ -1906,6 +1923,16 @@
         // ── Submit ────────────────────────────────────────────────
         form.addEventListener('submit', function (e) {
             e.preventDefault();
+            
+            // Verificación Honeypot (Anti-spam)
+            const honeypot = document.getElementById('_gotcha');
+            if (honeypot && honeypot.value) {
+                // Es un bot, fingimos éxito
+                form.style.display = 'none';
+                success.style.display = 'block';
+                return;
+            }
+
             if (!validate()) return;
 
             // URL del Webhook (Make.com -> Notion)
@@ -1929,6 +1956,11 @@
                     submitBtn.classList.remove('loading');
                     form.style.display = 'none';
                     success.style.display = 'block';
+                    
+                    // Disparar evento de conversión
+                    if (window.dataLayer) {
+                        window.dataLayer.push({'event': 'form_submission', 'form_name': 'leadForm'});
+                    }
                 })
                 .catch(err => {
                     console.error("Error al enviar:", err);
