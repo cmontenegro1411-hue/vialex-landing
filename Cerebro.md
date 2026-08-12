@@ -128,3 +128,8 @@ Desarrollar una landing page de alta conversión para Vialex, una agencia de aut
 - Se añadió una trampa **Anti-spam (Honeypot)** mediante un campo `_gotcha` oculto; bloquea envíos automatizados silenciosamente.
 - Se incorporaron inputs ocultos e inyección JS para capturar variables **UTM** de campañas de marketing.
 - Se incluyó integración nativa con el `dataLayer` de GTM (evento `form_submission`) al completarse el envío para registro de conversiones (Ads/Analytics).
+
+### Optimización SEO y Rastreadores
+- Se inyectaron metaetiquetas esenciales (`<meta name="description">`, `<meta name="keywords">`) para correcta indexación en Google.
+- Se configuraron tarjetas Open Graph (`og:`) y Twitter Cards para enriquecer las previsualizaciones al compartir enlaces en redes sociales y WhatsApp.
+- **⚠️ NOTA IMPORTANTE PENDIENTE:** Recordar actualizar la URL base de las etiquetas `og:url`, `og:image`, `twitter:url` y `twitter:image` una vez que se conecte el dominio personalizado definitivo. Actualmente apuntan a Vercel.
