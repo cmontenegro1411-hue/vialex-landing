@@ -104,3 +104,27 @@ Desarrollar una landing page de alta conversión para Vialex, una agencia de aut
 - Revisar si el contraste del footer quedó completamente resuelto en producción.
 - Evaluar si se necesita agregar una versión SVG o PNG con fondo transparente del logo para mayor flexibilidad.
 - Continuar con ajustes de diseño o nuevas secciones según requerimientos del cliente.
+
+## 📅 Sesión 11 de Agosto 2026
+
+### Ajustes Visuales del Hero y Navegación
+- **Ocultamiento del Botón Navbar Inicial**: Se añadió lógica CSS y JS para ocultar el CTA de la cabecera cuando se está en la cima de la página, mostrándolo gradualmente al hacer scroll.
+- **Rediseño del Hero Banner**: 
+  - Se eliminó el botón secundario ("Ver Soluciones").
+  - Se estableció un diseño equilibrado a 2 columnas para no ocultar la marca de agua del fondo (la V).
+  - Se integró una **Glass Card** (tarjeta estilo cristal) en la columna derecha para envolver el CTA, mejorando la estética premium.
+  - Los textos ("Copy") de la propuesta de valor principal se acortaron para ser más directos.
+- **Restauración de Enlace AI Hub**: Se descomentó el botón "VIALEX AI Hub" en la cabecera y se enlazó a su nuevo dominio en Vercel (`https://vialex-io-portal.vercel.app/`).
+- **Unificación de Llamado a la Acción**: Todos los botones superiores y flotantes ahora muestran el texto unificado **"Solicitar Diagnóstico"**.
+
+### Refinamiento de Copy (Sección Servicios)
+- **Consultoría Estratégica**: Se ajustó el texto para enfocarse en la entrega llave en mano y capacitación del sistema.
+- **Reportes Automáticos**: Se acortó el título de la tarjeta de "Reportes y Dashboards Inteligentes" para ser más ágil.
+- **Automatización**: Se reformularon los textos de la tarjeta para listar explícitamente las herramientas conectadas (Excel, CRM, correos).
+
+### Fortalecimiento de Seguridad y Tracking en Formulario
+- Se añadieron atributos `required` para validación HTML5 nativa como respaldo al JavaScript.
+- Se configuró semánticamente `method="POST"`.
+- Se añadió una trampa **Anti-spam (Honeypot)** mediante un campo `_gotcha` oculto; bloquea envíos automatizados silenciosamente.
+- Se incorporaron inputs ocultos e inyección JS para capturar variables **UTM** de campañas de marketing.
+- Se incluyó integración nativa con el `dataLayer` de GTM (evento `form_submission`) al completarse el envío para registro de conversiones (Ads/Analytics).
